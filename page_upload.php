@@ -10,13 +10,12 @@ if (isset($submitPressed)) {
         $fileType = exif_imagetype($_FILES['txtFile']['tmp_name']);
         $targetFile = $targetDirectory . $newFileName . '.' . $fileExtension;
         $uploadOk = TRUE;
-        if ($_FILES['txtFile']['size'] > 2048 * 2048) {
+        if ($_FILES['txtFile']['size'] > 1024 * 2048) {
             $uploadOk = FALSE;
             $stringError = 'File exceed 2 MB' . '<br>';
         }
-        if (!in_array($fileType, $allowedTypes)) {
+        if ($uploadOk && !in_array($fileType, $allowedTypes)) {
             $uploadOk = FALSE;
-            echo $fileType;
             $stringError = 'Image file must be jpg or png' . '<br>';
         }
         if ($uploadOk) {
